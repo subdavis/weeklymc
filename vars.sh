@@ -11,7 +11,8 @@ NOTIFY_MESSAGE="Server coming online in 15 minutes!"
 S3BUCKET="weekly-minecraft"
 # LOCATION of various things on disk
 APPDIR=/opt/mc
-LOGFILE=/var/log/mc/opt.log
+LOGDIR=/var/log/mc
+LOGFILE=$LOGDIR/opt.log
 # Whether to start on a timer or just at boot
 # If autostart is true, server will run indefinitely.
 # Else server will run on cron timer
@@ -19,4 +20,4 @@ AUTOSTART="true"
 # Name for server session
 SERVER_SESSION_NAME="mc"
 # APT dependencies
-DEPENDENCIES="curl unzip awscli"
+DEPENDENCIES="curl unzip awscli tmux"

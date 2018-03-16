@@ -3,6 +3,9 @@
 # Load variables
 source $SCRIPTDIR/vars.sh
 
+mkdir -p $APPDIR
+mkdir -p $LOGDIR
+
 apt install -y $DEPENDENCIES
 
 cd $APPDIR

@@ -6,7 +6,7 @@
 
 # SET SCRIPTDIR = location of this git repo
 echo "SCRIPTDIR=/opt/github.com/weeklymc" >> /etc/environment
-echo "$AWS_ACCESS_KEY_ID"
+
 export SCRIPTDIR=/opt/github.com/weeklymc
 
 # Clone scripts from git
