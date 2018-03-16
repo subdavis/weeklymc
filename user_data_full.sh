@@ -24,7 +24,7 @@ else
 fi
 
 # Get server jar from S3
-aws s3 cp s3://$S3BUCKET/jars/spigot.jar $APPDIR/worlddata/spigot.jar
+aws s3 cp s3://$S3BUCKET/jars/spigot.jar $APPDIR/spigot.jar
 
 # IF we should start the server immediately on boot
 if [ "$AUTOSTART" == "true" ]; then

@@ -36,11 +36,10 @@ session-end () {
 
 server-run () {
     # This script is for starting a server. 
-    cd $APPDIR 
+    cd $APPDIR/worlddata
     echo "[$(date)] BEGINNING server restart loop" >> $LOGFILE
     while true; do
         java -jar -Xmx2G \
-            -UseGCOverheadLimit \
             -Xms2G -Xmn768m -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC \
             -XX:+UseParNewGC -XX:+UseNUMA -XX:+CMSParallelRemarkEnabled \
             -XX:MaxTenuringThreshold=15 -XX:MaxGCPauseMillis=30 \
@@ -50,7 +49,7 @@ server-run () {
             -Dfml.ignoreInvalidMinecraftCertificates=true -XX:+UseFastAccessorMethods -XX:+UseCompressedOops \
             -XX:+OptimizeStringConcat -XX:+AggressiveOpts -XX:ReservedCodeCacheSize=2048m \
             -XX:+UseCodeCacheFlushing -XX:SoftRefLRUPolicyMSPerMB=10000 -XX:ParallelGCThreads=10 \
-            spigot.jar
+            $APPDIR/spigot.jar
         code=$?
         [ $code -eq 0 ] && break;
         echo "$(date) SERVER FAILED UN-GRACEFULLY with exit code $code" >> $LOGFILE
