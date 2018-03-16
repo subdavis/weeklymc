@@ -7,12 +7,9 @@ apt install -y $DEPENDENCIES
 
 cd $APPDIR
 
-# Create user accounts if they don't exist.
-id -u mc || adduser --disabled-password --gecos "" mc
-su mc
-
 # Set DNS for the new public IP.
 MYIP=$(curl https://api.ipify.org/)
+
 # TODO: update r53 domain
 
 # Get data from s3
@@ -26,7 +23,7 @@ fi
 aws s3 cp s3://$S3BUCKET/jars/spigot.jar $APPDIR/spigot.jar
 
 # IF we should start the server immediately on boot
-if [ "$AUTOSTART" == "true" ]; do
+if [ "$AUTOSTART" == "true" ]; then
 	$SCRIPTDIR/session.sh begin
 	sleep 86400 # In case we need to keep docker alive
 else

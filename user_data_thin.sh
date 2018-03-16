@@ -1,19 +1,23 @@
 #!/bin/bash
 
 # Install dependencies
-apt update
-apt install git
+# apt update
+# apt install git
 
 # SET SCRIPTDIR = location of this git repo
 echo "SCRIPTDIR=/opt/github.com/weeklymc" >> /etc/environment
+echo "$AWS_ACCESS_KEY_ID"
 export SCRIPTDIR=/opt/github.com/weeklymc
 
 # Clone scripts from git
 mkdir -p /opt/github.com && cd /opt/github.com
 
+git config --global user.name Brandon
+git config --global user.email weeklymc@anon.subdavis.com
+
 if [ ! -d "weeklymc" ]
 then
-    git clone https://github.com:subdavis/weeklymc
+    git clone https://github.com/subdavis/weeklymc
     cd weeklymc
 else
     cd weeklymc
