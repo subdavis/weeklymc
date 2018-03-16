@@ -19,11 +19,12 @@ MYIP=$(curl https://api.ipify.org/)
 aws s3 cp s3://$S3BUCKET/worlds/worlddata.zip worlddata.zip
 if [ $? -eq 0 ]; then
 	unzip worlddata.zip
-	mv -v worlddata/* $APPDIR/
+else
+	mkdir -p worlddata
 fi
 
 # Get server jar from S3
-aws s3 cp s3://$S3BUCKET/jars/spigot.jar $APPDIR/spigot.jar
+aws s3 cp s3://$S3BUCKET/jars/spigot.jar $APPDIR/worlddata/spigot.jar
 
 # IF we should start the server immediately on boot
 if [ "$AUTOSTART" == "true" ]; then

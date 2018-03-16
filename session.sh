@@ -13,7 +13,7 @@ alert () {
 session-begin () {
     # Start the server in a tmux session
     echo "[$(date)] BEGINNING session" >> $LOGFILE
-    tmux new -d -s $SERVER_SESSION_NAME $SCRIPTDIR/session.sh runserver
+    tmux new-session -d -s $SERVER_SESSION_NAME "$SCRIPTDIR/session.sh runserver"
 }
 
 session-end () {
