@@ -37,6 +37,7 @@ session-end () {
 server-run () {
     # This script is for starting a server. 
     cd $APPDIR/worlddata
+    echo "eula=true" > eula.txt
     echo "[$(date)] BEGINNING server restart loop" >> $LOGFILE
     while true; do
         java -jar -Xmx2G \
