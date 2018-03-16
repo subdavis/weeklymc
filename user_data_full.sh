@@ -1,6 +1,7 @@
 #!/bin/bash -x
 
 # Load variables
+source /etc/environment
 source $SCRIPTDIR/vars.sh
 
 mkdir -p $APPDIR

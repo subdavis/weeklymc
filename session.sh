@@ -1,6 +1,7 @@
 #!/bin/bash -x
 
 # LOAD CONFIG
+source /etc/environment
 source $SCRIPTDIR/vars.sh
 
 alert () {
