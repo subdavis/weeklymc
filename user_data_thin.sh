@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -x
 
 # Install dependencies
 # apt update

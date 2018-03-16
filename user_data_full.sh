@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -x
 
 # Load variables
 source $SCRIPTDIR/vars.sh
