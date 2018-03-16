@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Install dependencies
+apt update
 apt install git
 
 # SET SCRIPTDIR = location of this git repo
@@ -12,7 +13,7 @@ mkdir -p /opt/github.com && cd /opt/github.com
 
 if [ ! -d "weeklymc" ]
 then
-    git clone git@github.com:subdavis/weeklymc.git
+    git clone https://github.com:subdavis/weeklymc
     cd weeklymc
 else
     cd weeklymc

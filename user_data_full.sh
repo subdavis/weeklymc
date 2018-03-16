@@ -26,8 +26,9 @@ fi
 aws s3 cp s3://$S3BUCKET/jars/spigot.jar $APPDIR/spigot.jar
 
 # IF we should start the server immediately on boot
-if [ "$AUTOSTART" = true ]; do
+if [ "$AUTOSTART" == "true" ]; do
 	$SCRIPTDIR/session.sh begin
+	sleep 86400 # In case we need to keep docker alive
 else
 	# Schedule CRON startup and shutdown.
 	crontab -l > currentcron

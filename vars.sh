@@ -15,7 +15,7 @@ LOGFILE=/var/log/mc/opt.log
 # Whether to start on a timer or just at boot
 # If autostart is true, server will run indefinitely.
 # Else server will run on cron timer
-AUTOSTART=false
+AUTOSTART="true"
 # Name for server session
 SERVER_SESSION_NAME="mc"
 # APT dependencies
