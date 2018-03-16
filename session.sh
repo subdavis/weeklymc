@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # LOAD CONFIG
 source $SCRIPTDIR/vars.sh
