@@ -54,9 +54,9 @@ server-run () {
             $APPDIR/spigot.jar
         code=$?
         [ $code -eq 0 ] && break;
-        echo "$(date) SERVER FAILED UN-GRACEFULLY with exit code $code" >> $LOGFILE
+        echo "[$(date)] SERVER FAILED UN-GRACEFULLY with exit code $code" >> $LOGFILE
     done
-    echo "$(date) ENDED server restart loop -- Goodbye" >> $LOGFILE
+    echo "[$(date)] ENDED server restart loop -- Goodbye" >> $LOGFILE
 }
 
 case $1 in

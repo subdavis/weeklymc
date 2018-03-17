@@ -25,7 +25,7 @@ resource "aws_iam_policy_attachment" "craft-attach" {
 
 resource "aws_iam_instance_profile" "craft_profile" {
   name  = "craft_profile"
-  roles = ["${aws_iam_role.role.name}"]
+  role = "${aws_iam_role.role.name}"
 }
 
 ##################################################################
@@ -79,12 +79,16 @@ module "security_group" {
   ]
 }
 
+data "template_file" "init" {
+  template = "${file("${path.module}/../user_data_thin.sh")}"
+}
+
 module "ec2" {
   source = "github.com/terraform-aws-modules/terraform-aws-ec2-instance"
 
   name                        = "craft"
   ami                         = "${data.aws_ami.amazon_linux.id}"
-  instance_type               = "m4.large"
+  instance_type               = "t2.medium"
   iam_instance_profile        = "${aws_iam_instance_profile.craft_profile.name}"
   subnet_id                   = "${element(data.aws_subnet_ids.all.ids, 0)}"
   vpc_security_group_ids      = ["${module.security_group.this_security_group_id}"]

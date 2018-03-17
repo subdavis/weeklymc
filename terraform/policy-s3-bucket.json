@@ -1,0 +1,21 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:*"],
+      "Resource": [
+        "arn:aws:s3:::weekly-minecraft",
+        "arn:aws:s3:::weekly-minecraft/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:*",
+        "route53domains:*"
+      ],
+      "Resource": ["*"]
+    }
+  ]
+}
