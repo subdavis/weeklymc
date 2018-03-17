@@ -41,7 +41,6 @@ crontab -l > currentcron
 # IF we should start the server immediately on boot
 if [ "$AUTOSTART" == "true" ]; then
 	$SCRIPTDIR/session.sh begin
-	sleep 86400 # In case we need to keep docker alive
 else
 	#echo new cron into cron file
 	echo "$STARTCRON   $SCRIPTDIR/session.sh begin >> $LOGDIR/begin.log" >> newcron
@@ -54,3 +53,4 @@ echo "@reboot      $SCRIPTDIR/user_data_full.sh >> $LOGDIR/boot.log" >> newcron
 #install new cron file
 crontab newcron
 rm newcron currentcron
+sleep 86400 # In case we need to keep docker alive

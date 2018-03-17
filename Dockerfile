@@ -10,7 +10,7 @@ EXPOSE 8080
 WORKDIR /
 
 RUN apt update
-RUN apt install -y git curl unzip awscli tmux default-jre
+RUN apt install -y git curl unzip awscli tmux default-jre cron
 
 COPY ./user_data_thin.sh .
 
