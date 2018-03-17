@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-1"
+  region = "us-east-1"
 }
 
 ##################################################################
@@ -46,15 +46,15 @@ data "aws_ami" "amazon_linux" {
     name = "name"
 
     values = [
-      "amzn-ami-hvm-*-x86_64-gp2",
+      "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
     ]
   }
 
   filter {
-    name = "owner-alias"
+    name = "owner-id"
 
     values = [
-      "amazon",
+      "099720109477",
     ]
   }
 }
@@ -68,11 +68,11 @@ module "security_group" {
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["http-80-tcp", "ssh-tcp", "http-8080-tcp"]
-  egress_rules        = ["all-all"]
   ingress_with_cidr_blocks = [
     {
       from_port   = 25565
       to_port     = 25565
+      protocol    = "tcp"
       description = "craft"
       cidr_blocks = "0.0.0.0/0" 
     }
@@ -92,5 +92,7 @@ module "ec2" {
   iam_instance_profile        = "${aws_iam_instance_profile.craft_profile.name}"
   subnet_id                   = "${element(data.aws_subnet_ids.all.ids, 0)}"
   vpc_security_group_ids      = ["${module.security_group.this_security_group_id}"]
+  key_name                    = "weekly-minecraft"
+  user_data                   = "${data.template_file.init.rendered}"
   associate_public_ip_address = true
 }

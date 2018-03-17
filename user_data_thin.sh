@@ -1,8 +1,8 @@
 #!/bin/bash -x
 
 # Install dependencies
-# apt update
-# apt install git
+apt update
+apt install git
 
 # SET SCRIPTDIR = location of this git repo
 echo "SCRIPTDIR=/opt/github.com/weeklymc" >> /etc/environment
