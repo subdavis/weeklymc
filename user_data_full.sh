@@ -28,7 +28,7 @@ MYIP=$(curl https://api.ipify.org/)
 # TODO: update r53 domain
 
 # Get data from s3 IF NOT EXISTS
-if [ ! -d $APPDIR/worlddata ]
+if [ ! -d $APPDIR/worlddata ]; then
 	aws s3 cp "s3://$S3BUCKET/data/$BACKUP_NAME" "$APPDIR/$BACKUP_NAME" && unzip $BACKUP_NAME
 fi
 
