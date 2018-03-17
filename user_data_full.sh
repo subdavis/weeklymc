@@ -20,6 +20,11 @@ mkdir -p $LOGDIR
 
 apt install -y $DEPENDENCIES
 
+# Set the timezone
+echo "US/Eastern" > /etc/timezone
+# let cron realize these changes.
+/etc/init.d/cron reload
+
 cd $APPDIR
 
 # Set DNS for the new public IP.
