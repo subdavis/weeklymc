@@ -21,7 +21,7 @@ mkdir -p $LOGDIR
 apt install -y $DEPENDENCIES
 
 # Set the timezone
-echo "US/Eastern" > /etc/timezone
+timedatectl set-timezone America/New_York
 # let cron realize these changes.
 /etc/init.d/cron reload
 
