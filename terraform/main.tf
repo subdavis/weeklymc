@@ -77,6 +77,16 @@ module "security_group" {
       cidr_blocks = "0.0.0.0/0" 
     }
   ]
+
+  egress_with_cidr_blocks = [
+    {
+      from_port   = 1
+      to_port     = 65535
+      protocol    = "tcp"
+      description = "egress all"
+      cidr_blocks = "0.0.0.0/0"
+    }
+  ]
 }
 
 data "template_file" "init" {

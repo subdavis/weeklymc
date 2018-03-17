@@ -18,26 +18,48 @@ session-begin () {
 }
 
 session-end () {
-    echo "[$(date)] ENDING session" >> $LOGFILE
+    echo "[$(date)] ANNOUNCE end session" >> $LOGFILE
+    tmux send-keys -t $SERVER_SESSION_NAME '/say Server going down in 15 seconds' Enter
+    sleep 15
+
     echo "[$(date)] GRACEFULLY STOPPING tmux session" >> $LOGFILE
     # Gracefully stop the server
     tmux send-keys -t $SERVER_SESSION_NAME 'stop' Enter
     # Give the server 15 seconds to calm down.
     sleep 15
-    # Send ctrl+c
-    tmux send-keys -t $SERVER_SESSION_NAME C-c 
-    # Give the server more time
-    sleep 15
+    # Kill session if we need to
+    if [ "$(tmux ls 2>/dev/null | wc -l)" != "0" ]; then
+        echo "[$(date)] UN-GRACEFULLY STOPPING tmux session" >> $LOGFILE
+        tmux kill-session -t $SERVER_SESSION_NAME
+        sleep 15
+    fi
+    # Backup
+    pushd .
+    server-backup && alert admins "Backup $BACKUP_NAME exported to s3."
+    popd
+}
 
+server-backup () {
     # Backup to s3
-    BACKUP_NAME="$(date +%s)-worlddata.zip"
-    # Alert on backup
-    alert admins "Backup $BACKUP_NAME exported to s3."
+    cd $APPDIR
+    if [ -d $APPDIR/worlddata ]; then
+        echo "[$(date)] BEGINNING data backup" >> $LOGFILE
+        OLD_BACKUP_NAME="worlddata-$(date +%s).zip"
+        BACKUP_NAME="worlddata.zip"
+        # Remove the last backup if it exists.
+        rm $BACKUP_NAME 
+        zip -r $BACKUP_NAME worlddata/
+        aws s3 mv "s3://$S3BUCKET/data/$BACKUP_NAME" "s3://$S3BUCKET/data/$OLD_BACKUP_NAME"
+        aws s3 cp "$BACKUP_NAME" "s3://$S3BUCKET/data/$BACKUP_NAME"
+    else
+        echo "[$(date)] ERROR no world to back up" >> $LOGFILE
+    fi
 }
 
 server-run () {
     # This script is for starting a server. 
     cd $APPDIR/worlddata
+
     echo "eula=true" > eula.txt
     echo "[$(date)] BEGINNING server restart loop" >> $LOGFILE
     while true; do

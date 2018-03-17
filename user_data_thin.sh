@@ -1,4 +1,5 @@
 #!/bin/bash -x
+# THIS SCRIPT RUNS ONCE!
 
 # Install dependencies
 apt update

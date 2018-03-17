@@ -13,6 +13,7 @@ S3BUCKET="weekly-minecraft"
 APPDIR=/opt/mc
 LOGDIR=/var/log/mc
 LOGFILE=$LOGDIR/opt.log
+BACKUP_NAME="worlddata.zip"
 # Whether to start on a timer or just at boot
 # If autostart is true, server will run indefinitely.
 # Else server will run on cron timer
