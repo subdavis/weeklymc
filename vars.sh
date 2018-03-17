@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # CRON time to run session-start
-STARTCRON="14 13 * * *" # 7 PM TUESDAY
+STARTCRON="35 13 * * *" # 7 PM TUESDAY
 # CRON time to run session-end 
-STOPCRON="18 13 * * *"  # 9 PM TUESDAY
+STOPCRON="45 13 * * *"  # 9 PM TUESDAY
 # CRON time to send notification to players
 NOTIFY_TIME="45 18 * * 2"      # 6:45 TUESDAY
 NOTIFY_MESSAGE="Server coming online in 15 minutes!"
@@ -21,4 +21,4 @@ AUTOSTART="false"
 # Name for server session
 SERVER_SESSION_NAME="mc"
 # APT dependencies
-DEPENDENCIES="default-jre curl unzip awscli tmux cron"
+DEPENDENCIES="openjdk-8-jre curl unzip awscli tmux cron"
