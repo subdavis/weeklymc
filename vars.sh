@@ -20,4 +20,4 @@ AUTOSTART="true"
 # Name for server session
 SERVER_SESSION_NAME="mc"
 # APT dependencies
-DEPENDENCIES="curl unzip awscli tmux"
+DEPENDENCIES="default-jre curl unzip awscli tmux"
