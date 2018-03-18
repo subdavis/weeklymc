@@ -1,5 +1,7 @@
 # Weekly Minecraft
 
+Set up scheduling with https://docs.aws.amazon.com/solutions/latest/instance-scheduler/welcome.html
+
 # Useful commands
 
 ```sh

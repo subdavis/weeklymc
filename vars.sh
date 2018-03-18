@@ -21,4 +21,6 @@ AUTOSTART="false"
 # Name for server session
 SERVER_SESSION_NAME="mc"
 # APT dependencies
-DEPENDENCIES="openjdk-8-jre curl unzip awscli tmux cron"
+DEPENDENCIES="openjdk-8-jre curl unzip awscli tmux cron zip"
+# Route53 hosted zone
+ROUTE53_ZONE="Z1W5O98VODO3T3"

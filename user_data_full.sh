@@ -30,7 +30,30 @@ cd $APPDIR
 # Set DNS for the new public IP.
 MYIP=$(curl https://api.ipify.org/)
 
-# TODO: update r53 domain
+# Update r53 domain
+cat <<EOF > $APPDIR/updateR53.json 
+{
+  "Comment": "Update Route53 to point to new private IP",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "mc.aws.subdavis.com",
+        "Type": "A",
+        "TTL": 60,
+        "ResourceRecords": [
+          {
+            "Value": "$MYIP"
+          }
+        ]
+      }
+    }
+  ]
+}
+EOF
+aws route53 change-resource-record-sets \
+	--hosted-zone-id $ROUTE53_ZONE \
+	--change-batch file://$APPDIR/updateR53.json
 
 # Get data from s3 IF NOT EXISTS
 if [ ! -d $APPDIR/worlddata ]; then
