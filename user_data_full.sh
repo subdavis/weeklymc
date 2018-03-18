@@ -77,13 +77,13 @@ if [ "$AUTOSTART" == "true" ]; then
 	$SCRIPTDIR/session.sh begin
 else
 	#echo new cron into cron file
-	echo "$STARTCRON   $SCRIPTDIR/session.sh begin                              2>> $LOGDIR/begin.log"  >> newcron
-	echo "$STOPCRON    $SCRIPTDIR/session.sh end                                2>> $LOGDIR/end.log"    >> newcron
-	echo "$NOTIFY_TIME $SCRIPTDIR/session.sh notify players \"$NOTIFY_MESSAGE\" 2>> $LOGDIR/notify.log" >> newcron
+	echo "$STARTCRON   $SCRIPTDIR/session.sh begin                              >> $LOGDIR/begin.log 2>&1"  >> newcron
+	echo "$STOPCRON    $SCRIPTDIR/session.sh end                                >> $LOGDIR/end.log 2>&1"    >> newcron
+	echo "$NOTIFY_TIME $SCRIPTDIR/session.sh notify players \"$NOTIFY_MESSAGE\" >> $LOGDIR/notify.log 2>&1" >> newcron
 fi
 
 # Always run this script at reboot.
-echo "@reboot      $SCRIPTDIR/user_data_full.sh 2>> $LOGDIR/boot.log" >> newcron
+echo "@reboot      $SCRIPTDIR/user_data_full.sh >> $LOGDIR/boot.log 2>&1" >> newcron
 #install new cron file
 crontab newcron
 rm newcron currentcron
