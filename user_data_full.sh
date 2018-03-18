@@ -57,8 +57,14 @@ aws route53 change-resource-record-sets \
 
 # Get data from s3 IF NOT EXISTS
 if [ ! -d $APPDIR/worlddata ]; then
-	aws s3 cp "s3://$S3BUCKET/data/$BACKUP_NAME" "$APPDIR/$BACKUP_NAME" && unzip $BACKUP_NAME
+	aws s3 cp "s3://$S3BUCKET/data/$BACKUP_NAME" "$BACKUP_NAME" && unzip $BACKUP_NAME
 fi
+
+# Move the new config files into place.
+for f in $(ls $SCRIPTDIR/config); do
+	rm $APPDIR/worlddata/$f
+	cp $SCRIPTDIR/config/$f $APPDIR/worlddata/$f
+done
 
 # Get server jar from S3
 aws s3 cp s3://$S3BUCKET/jars/spigot.jar $APPDIR/spigot.jar
@@ -71,13 +77,13 @@ if [ "$AUTOSTART" == "true" ]; then
 	$SCRIPTDIR/session.sh begin
 else
 	#echo new cron into cron file
-	echo "$STARTCRON   $SCRIPTDIR/session.sh begin >> $LOGDIR/begin.log" >> newcron
-	echo "$STOPCRON    $SCRIPTDIR/session.sh end   >> $LOGDIR/end.log"   >> newcron
-	echo "$NOTIFY_TIME $SCRIPTDIR/session.sh notify players \"$NOTIFY_MESSAGE\" >> $LOGDIR/notify.log" >> newcron
+	echo "$STARTCRON   $SCRIPTDIR/session.sh begin                              2>> $LOGDIR/begin.log"  >> newcron
+	echo "$STOPCRON    $SCRIPTDIR/session.sh end                                2>> $LOGDIR/end.log"    >> newcron
+	echo "$NOTIFY_TIME $SCRIPTDIR/session.sh notify players \"$NOTIFY_MESSAGE\" 2>> $LOGDIR/notify.log" >> newcron
 fi
 
 # Always run this script at reboot.
-echo "@reboot      $SCRIPTDIR/user_data_full.sh >> $LOGDIR/boot.log" >> newcron
+echo "@reboot      $SCRIPTDIR/user_data_full.sh 2>> $LOGDIR/boot.log" >> newcron
 #install new cron file
 crontab newcron
 rm newcron currentcron
