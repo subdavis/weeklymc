@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # CRON time to run session-start
-STARTCRON="35 13 * * *" # 7 PM TUESDAY
+STARTCRON="0 20 * * *" # 8 PM 
 # CRON time to run session-end 
-STOPCRON="45 13 * * *"  # 9 PM TUESDAY
+STOPCRON="30 21 * * *"  # 9:30 PM
 # CRON time to send notification to players
 NOTIFY_TIME="45 18 * * 2"      # 6:45 TUESDAY
 NOTIFY_MESSAGE="Server coming online in 15 minutes!"
