@@ -1,6 +1,9 @@
 #!/bin/bash -x
 # THIS SCRIPT RUNS EVERY BOOT
 
+# Set a timestamp in the logs.
+echo "RUN ON $(date)"
+
 # Load variables
 source /etc/environment
 source $SCRIPTDIR/vars.sh
@@ -13,6 +16,9 @@ else
 	cd $SCRIPTDIR/..
 	git clone https://github.com/subdavis/weeklymc $SCRIPTDIR
 fi
+
+# Source again in case they changed in git.
+source $SCRIPTDIR/vars.sh
 
 # These directories are needed later.
 mkdir -p $APPDIR
