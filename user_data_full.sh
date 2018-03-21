@@ -6,7 +6,6 @@ echo "RUN ON $(date)"
 
 # Load variables
 source /etc/environment
-source $SCRIPTDIR/vars.sh
 
 if [ -d $SCRIPTDIR ]; then
 	cd $SCRIPTDIR
