@@ -47,7 +47,7 @@ commands:
   - testforblock
   - tellraw
 messages:
-  whitelist: You are not whitelisted on this server!
+  whitelist: You are not whitelisted.  Ask brandon to fix this.
   unknown-command: Unknown command. Type "/help" for help.
   server-full: The server is full!
   outdated-client: Outdated client! Please use {0}
@@ -95,16 +95,16 @@ world-settings:
     squid-spawn-range:
       min: 45.0
     growth:
-      cactus-modifier: 100
-      cane-modifier: 100
-      melon-modifier: 100
-      mushroom-modifier: 100
-      pumpkin-modifier: 100
-      sapling-modifier: 100
-      wheat-modifier: 100
-      netherwart-modifier: 100
+      cactus-modifier: 200
+      cane-modifier: 200
+      melon-modifier: 200
+      mushroom-modifier: 200
+      pumpkin-modifier: 200
+      sapling-modifier: 200
+      wheat-modifier: 240
+      netherwart-modifier: 200
       vine-modifier: 100
-      cocoa-modifier: 100
+      cocoa-modifier: 200
     entity-activation-range:
       animals: 32
       monsters: 32

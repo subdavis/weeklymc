@@ -24,3 +24,6 @@ SERVER_SESSION_NAME="mc"
 DEPENDENCIES="openjdk-8-jre curl unzip awscli tmux cron zip"
 # Route53 hosted zone
 ROUTE53_ZONE="Z1W5O98VODO3T3"
+# Enabled Plugins.  If the plugin is in this list, it should have a JAR available in s3://$S3BUCKET/plugins/
+# It should also have a config folder in plugins/
+ENABLED_PLUGISN="TreeFeller.jar SilkSpawners.jar"

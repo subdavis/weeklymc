@@ -20,7 +20,7 @@ fi
 source $SCRIPTDIR/vars.sh
 
 # These directories are needed later.
-mkdir -p $APPDIR
+mkdir -p $APPDIR/worlddata
 mkdir -p $LOGDIR
 
 apt install -y $DEPENDENCIES
@@ -56,23 +56,34 @@ cat <<EOF > $APPDIR/updateR53.json
   ]
 }
 EOF
+
 aws route53 change-resource-record-sets \
 	--hosted-zone-id $ROUTE53_ZONE \
 	--change-batch file://$APPDIR/updateR53.json
 
 # Get data from s3 IF NOT EXISTS
-if [ ! -d $APPDIR/worlddata ]; then
+if [ ! -e $APPDIR/worlddata/eula.txt ]; then
 	aws s3 cp "s3://$S3BUCKET/data/$BACKUP_NAME" "$BACKUP_NAME" && unzip $BACKUP_NAME
 fi
 
 # Move the new config files into place.
 for f in $(ls $SCRIPTDIR/config); do
-	rm $APPDIR/worlddata/$f
 	cp $SCRIPTDIR/config/$f $APPDIR/worlddata/$f
 done
 
-# Get server jar from S3
+# Get server jar from S3 if it doesn't exist.
 aws s3 cp s3://$S3BUCKET/jars/spigot.jar $APPDIR/spigot.jar
+
+# Get the plugins from S3
+for p in "$ENABLED_PLUGINS"; do
+	aws s3 cp s3://$S3BUCKET/plugins/$p $APPDIR/worlddata/plugins/$p
+done
+
+# Place the config folders for plugins....
+for f in "$(ls $APPDIR/plugins)"; do
+	rm -rf "$APPDIR/worlddata/plugins/$f"
+	cp -R "$SCRIPTDIR/plugins/$f" "$APPDIR/worlddata/plugins/"
+done
 
 # Schedule CRON startup and shutdown.
 crontab -l > currentcron
