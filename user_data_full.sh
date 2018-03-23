@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 # THIS SCRIPT RUNS EVERY BOOT
 
 # Set a timestamp in the logs.
@@ -6,16 +6,6 @@ echo "RUN ON $(date)"
 
 # Load variables
 source /etc/environment
-
-if [ -d $SCRIPTDIR ]; then
-	cd $SCRIPTDIR
-	git pull  # Runs at every reboot, so there could have been changes.
-else
-	mkdir -p $SCRIPTDIR
-	cd $SCRIPTDIR/..
-	git clone https://github.com/subdavis/weeklymc $SCRIPTDIR
-fi
-
 # Source again in case they changed in git.
 source $SCRIPTDIR/vars.sh
 
@@ -99,7 +89,7 @@ else
 fi
 
 # Always run this script at reboot.
-echo "@reboot      $SCRIPTDIR/user_data_full.sh >> $LOGDIR/boot.log 2>&1" >> newcron
+echo "@reboot $SCRIPTDIR/user_data_thin.sh >> $LOGDIR/boot.log 2>&1" >> newcron
 #install new cron file
 crontab newcron
 rm newcron currentcron
