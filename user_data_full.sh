@@ -70,7 +70,7 @@ for p in "$ENABLED_PLUGINS"; do
 done
 
 # Place the config folders for plugins....
-for f in "$(ls $APPDIR/plugins)"; do
+for f in "$(ls $SCRIPTDIR/plugins)"; do
 	rm -rf "$APPDIR/worlddata/plugins/$f"
 	cp -R "$SCRIPTDIR/plugins/$f" "$APPDIR/worlddata/plugins/"
 done
