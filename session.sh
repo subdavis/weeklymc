@@ -43,7 +43,7 @@ server-backup () {
     # Backup to s3
     cd $APPDIR
     # Remove the plugin jars
-    for p in "$ENABLED_PLUGINS"; do
+    for p in $(echo "$ENABLED_PLUGINS"); do
         rm "$APPDIR/worlddata/plugins/$p"
     done
     # Backup world data to s3

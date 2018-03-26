@@ -65,7 +65,7 @@ done
 aws s3 cp s3://$S3BUCKET/jars/spigot.jar $APPDIR/spigot.jar
 
 # Get the plugins from S3
-for p in "$ENABLED_PLUGINS"; do
+for p in $(echo "$ENABLED_PLUGINS"); do
 	aws s3 cp s3://$S3BUCKET/plugins/$p $APPDIR/worlddata/plugins/$p
 done
 
