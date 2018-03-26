@@ -33,7 +33,7 @@ cat <<EOF > $APPDIR/updateR53.json
     {
       "Action": "UPSERT",
       "ResourceRecordSet": {
-        "Name": "mc.aws.subdavis.com",
+        "Name": "$ROUTE53_DOMAIN",
         "Type": "A",
         "TTL": 60,
         "ResourceRecords": [
