@@ -1,5 +1,11 @@
 # Weekly Minecraft
 
+My friends and I wanted a server that could handle 10-20 gracefully without lag.  We only wanted to play MC once a week for a few hours.  We didn't want to pay much money.
+
+This repo will get you set up with a server that runs when you want it and stops when you don't to keep costs down.  
+
+I run a t2.large with 8GB ram and 2 CPU cores for $2-3 per month.
+
 ### Prerequisites
 
 * Sign up for ROUTE53 and configure a domain name.
