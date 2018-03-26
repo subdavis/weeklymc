@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # CRON time to run session-start
-STARTCRON="0 20 * * *" # 8 PM 
+STARTCRON="0 21 * * *" # 9 PM 
 # CRON time to run session-end 
-STOPCRON="30 21 * * *"  # 9:30 PM
+STOPCRON="30 22 * * *"  # 10:30 PM
 # CRON time to send notification to players
-NOTIFY_TIME="45 18 * * 2"      # 6:45 TUESDAY
-NOTIFY_MESSAGE="Server coming online in 15 minutes!"
+NOTIFY_TIME="55 20 * * 2"      # 6:45 TUESDAY
+NOTIFY_MESSAGE="Server coming online in 5 minutes!"
 # CONSTANTS
 S3BUCKET="weekly-minecraft"
 # LOCATION of various things on disk
