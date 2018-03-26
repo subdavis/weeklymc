@@ -70,9 +70,9 @@ for p in $(echo "$ENABLED_PLUGINS"); do
 done
 
 # Place the config folders for plugins....
-for f in "$(ls $SCRIPTDIR/plugins)"; do
+for f in $(ls "$SCRIPTDIR/plugins"); do
 	mkdir -p "$APPDIR/worlddata/plugins/$f"
-	for cfg in $(ls $SCRIPTDIR/plugins/$f); do
+	for cfg in $(ls "$SCRIPTDIR/plugins/$f"); do
 		rm "$APPDIR/worlddata/plugins/$f/$cfg"
 		cp "$SCRIPTDIR/plugins/$f/$cfg" "$APPDIR/worlddata/plugins/$f/$cfg"
 	done
