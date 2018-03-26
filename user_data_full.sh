@@ -71,8 +71,11 @@ done
 
 # Place the config folders for plugins....
 for f in "$(ls $SCRIPTDIR/plugins)"; do
-	rm -rf "$APPDIR/worlddata/plugins/$f"
-	cp -R "$SCRIPTDIR/plugins/$f" "$APPDIR/worlddata/plugins/"
+	mkdir -p "$APPDIR/worlddata/plugins/$f"
+	for cfg in $(ls $SCRIPTDIR/plugins/$f); do
+		rm "$APPDIR/worlddata/plugins/$f/$cfg"
+		cp "$SCRIPTDIR/plugins/$f/$cfg" "$APPDIR/worlddata/plugins/$f/$cfg"
+	done
 done
 
 # Schedule CRON startup and shutdown.
