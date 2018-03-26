@@ -76,7 +76,7 @@ for f in "$(ls $APPDIR/plugins)"; do
 done
 
 # Schedule CRON startup and shutdown.
-crontab -l > currentcron
+crontab -l > currentcron;
 
 # IF we should start the server immediately on boot
 if [ "$AUTOSTART" == "true" ]; then
