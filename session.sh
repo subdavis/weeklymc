@@ -19,8 +19,8 @@ session-begin () {
 
 session-end () {
     echo "[$(date)] ANNOUNCE end session" >> $LOGFILE
-    tmux send-keys -t $SERVER_SESSION_NAME '/say Server going down in 15 seconds' Enter
-    sleep 15
+    tmux send-keys -t $SERVER_SESSION_NAME 'say Server going down in 30 seconds' Enter
+    sleep 30
 
     echo "[$(date)] GRACEFULLY STOPPING tmux session" >> $LOGFILE
     # Gracefully stop the server
