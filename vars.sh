@@ -3,7 +3,7 @@
 # CRON time to run session-start
 STARTCRON="0 21 * * *" # 9 PM 
 # CRON time to run session-end 
-STOPCRON="30 22 * * *"  # 10:30 PM
+STOPCRON="0 23 * * *"  # 10:30 PM
 # CRON time to send notification to players
 NOTIFY_TIME="55 20 * * 2"      # 6:45 TUESDAY
 NOTIFY_MESSAGE="Server coming online in 5 minutes!"
